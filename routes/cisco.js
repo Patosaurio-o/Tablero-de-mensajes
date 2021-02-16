@@ -3,28 +3,37 @@ const { msg, comment } = require('../db');
 const router = Router();
 
 router.get('/', async (req,res) => {
-  //const comments = await comment.findAll();
+  const comments = await comment.findAll();
   const msgs = await msg.findAll(
-   //{include: [comment]}
+   {include: [comment]}
   );
   res.render('index', {
     msg:msgs,
-    //comment:comments
+    comment:comments
   });
 });
 
 router.post('/', async (req,res) =>{
-  if(req.body.name==""||req.body.message==""){
+  if(req.body.name==''||req.body.message==''){
     return res.send('fail');
   }
   const new_msg = await msg.create({
     name: req.body.name,
     message: req.body.message
   });
- /* const new_comment = await comment.create({
-    name: req.body.nameComment,
-    comment: req.body.comment
-  });*/
+
+  res.redirect('/');
+});
+
+router.post('/comment', async (req,res) =>{
+  if(req.body.name==''||req.body.comment==''){
+    return res.send('fail');
+  }
+  const new_comment = await comment.create({
+    name: req.body.name,
+    comment: req.body.comment,
+    msgId: req.body.msgId
+  });
   res.redirect('/');
 });
 

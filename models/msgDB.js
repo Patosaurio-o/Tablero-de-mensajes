@@ -30,6 +30,10 @@ const comment = sql.define('comment', {
   comment: {
     type: DataTypes.STRING,
     allowNull: false
+  },
+  msgID: {
+    type: Sequelize.INTEGER,
+    allowNull: false
   }
 });
 

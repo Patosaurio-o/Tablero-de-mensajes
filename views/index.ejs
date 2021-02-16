@@ -14,9 +14,10 @@
     <div class="container">
       <div class="row">
         <div class="col-6 offset-2">
+          <h2 class="m-5">feizvuk :v</h2>
           <form action="/" method="post">
             <div class="col-6 form-floating mb-3">
-              <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="name" required>
+              <input type="text" class="form-control" id="floatingInput" name="name" required>
               <label for="floatingInput">Name</label>
             </div>
             <div class="form-floating">
@@ -30,21 +31,25 @@
           <% for (mesagges of msg) { %>
             <h2>User: <%= mesagges.name %></h2>
             <h4>message: <%= mesagges.message %></h4>
-            <form action="/" method="post">
+            <% for (comments of comment) { %>
+              <h4>User: <%= comments.name %></h4>
+              <h6>message: <%= comments.comment %></h6>
+            <%}%>
+            <form action="/comment" method="post">
               <div class="col-6 form-floating mb-3">
-                <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="nameComment" required>
+                <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="name" required>
                 <label for="floatingInput">Name</label>
               </div>
               <div class="form-floating">
-                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" name="Comment" required></textarea>
+                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" name="comment" required></textarea>
                 <label for="floatingTextarea2">comment</label>
                 <button type="submit" class="offset-11 btn btn-dark mt-2 mb-2">comment</button>
+                <input type="hidden" name="msgId" value="<%= mesagges.id %>">
               </div>
             </form>
           <%}%>  
         </div>
       </div>
     </div>
-
   </body>
 </html>
