@@ -31,11 +31,13 @@
           <% for (mesagges of msg) { %>
             <h2>User: <%= mesagges.name %></h2>
             <h4>message: <%= mesagges.message %></h4>
-            <% for (comments of comment) { %>
+            <% for (comments of comment ) { %>
               <h4>User: <%= comments.name %></h4>
               <h6>message: <%= comments.comment %></h6>
-            <%}%>
-            <form action="/comment" method="post">
+              <%}%>
+              <div class="posts"></div>
+              <form action="/comment" method="post">
+                <input type="hidden" name="msgId" value="<%= mesagges.id %>">
               <div class="col-6 form-floating mb-3">
                 <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="name" required>
                 <label for="floatingInput">Name</label>
@@ -44,7 +46,6 @@
                 <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" name="comment" required></textarea>
                 <label for="floatingTextarea2">comment</label>
                 <button type="submit" class="offset-11 btn btn-dark mt-2 mb-2">comment</button>
-                <input type="hidden" name="msgId" value="<%= mesagges.id %>">
               </div>
             </form>
           <%}%>  
