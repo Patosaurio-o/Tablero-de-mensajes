@@ -5,7 +5,9 @@ const sql = new Sequelize('msg_user', 'root', 'MySQL1234', {
   dialect: 'mysql'
 });
 
-const msg = sql.define('msg', {     
+module.exports = sql;
+/*
+const Msg = sql.define('Msg', {     
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
@@ -21,7 +23,7 @@ const msg = sql.define('msg', {
   }
 });
 
-const comment = sql.define('comment', {     
+const Comment = sql.define('Comment', {     
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
@@ -37,8 +39,8 @@ const comment = sql.define('comment', {
   }
 });
 
-msg.hasMany(comment);
-comment.belongsTo(msg);
+Msg.hasMany(Comment);
+Comment.belongsTo(Msg);
 
 sql.sync()
 .then(() => {
@@ -46,6 +48,7 @@ sql.sync()
 });
 
 module.exports = {
-  msg,
-  comment
-};;
+  Msg,
+  Comment
+};
+*/

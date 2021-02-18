@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const sql = require('../db');  
 
-const msg = sql.define('msg', {     
+const Msg = sql.define('Msg', {     
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -17,7 +17,7 @@ const msg = sql.define('msg', {
   }
 });
 
-const comment = sql.define('comment', {     
+const Comment = sql.define('Comment', {     
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -30,17 +30,18 @@ const comment = sql.define('comment', {
   comment: {
     type: DataTypes.STRING,
     allowNull: false
-  },
-  msgID: {
-    type: Sequelize.INTEGER,
-    allowNull: false
   }
 });
 
-msg.hasMany(comment);
-comment.belongsTo(msg);
+Msg.hasMany(Comment);
+Comment.belongsTo(Msg);
+
+sql.sync()
+.then(() => {
+  console.log('error 404 Data Base not found')
+});
 
 module.exports = {
-  msg,
-  comment
+  Msg,
+  Comment
 };

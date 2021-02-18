@@ -1,11 +1,13 @@
 const { Router } = require('express');
-const { msg, comment } = require('../db');
+const { Msg, Comment } = require('../models/msgDB');
 const router = Router();
 
 router.get('/', async (req,res) => {
-  const comments = await comment.findAll();
-  const msgs = await msg.findAll(
-   {include: [comment]}
+  const comments = await Comment.findAll(
+    {include: [Msg]}
+  );
+  const msgs = await Msg.findAll(
+   {include: [Comment]}
   );
   res.render('index', {
     msg:msgs,
@@ -17,7 +19,7 @@ router.post('/', async (req,res) =>{
   if(req.body.name==''||req.body.message==''){
     return res.send('fail');
   }
-  const new_msg = await msg.create({
+  const new_msg = await Msg.create({
     name: req.body.name,
     message: req.body.message
   });
@@ -29,10 +31,10 @@ router.post('/comment', async (req,res) =>{
   if(req.body.name==''||req.body.comment==''){
     return res.send('fail');
   }
-  const new_comment = await comment.create({
+  const new_comment = await Comment.create({
     name: req.body.name,
     comment: req.body.comment,
-    msgId: req.body.msgId
+    MsgId: req.body.msgId
   });
   res.redirect('/');
 });
